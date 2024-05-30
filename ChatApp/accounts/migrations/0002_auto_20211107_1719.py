@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='customuser',
             name='username',
-            field=models.CharField(default='bibeksuperuser', max_length=30, unique=True),
+            field=models.CharField(default='johnsmithsuperuser', max_length=30, unique=True),
             preserve_default=False,
         ),
         migrations.AlterField(
