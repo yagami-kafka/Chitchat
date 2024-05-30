@@ -1,0 +1,503 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block core_head %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<style>
+		input[type="file"] {
+    	display: none;
+		}
+		.custom-file-upload {
+			border: 1px solid #ccc;
+			display: inline-block;
+			padding: 6px 12px;
+			cursor: pointer;
+		}
+
+.friends:hover{
+	background: #f1f2f2;
+}
+.friends-item:hover{
+	background: #f1f2f2;
+}
+
+	.glow-on-hover {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none; 
+    color: white;
+    background: rgb(20, 88, 214);
+    cursor: pointer;
+    position: relative;
+	transition: all 0.3s;
+
+/*     border-radius: 10px; */
+}
+*{
+	box-sizing: border-box;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: teal;
+    color: #fff;
+    margin: 10px 30px 20px 30px;
+    padding: 0.5em;
+    box-sizing: border-box;
+	z-index: 1;
+   }
+   .nav-links a {
+    color: #fff;
+	text-decoration: none;
+   }
+   /* LOGO */
+   .logo {
+    font-size: 32px;
+   }
+   /* NAVBAR MENU */
+   .menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+   }
+   .menu li:hover {
+    background-color: #4c9e9e;
+    border-radius: 5px;
+    transition: 0.3s ease;
+   }
+   .menu li {
+    padding: 5px 14px;
+	list-style: none;
+   }
+   /* DROPDOWN MENU */
+   .services {
+    position: relative; 
+   }
+   .dropdown {
+    background-color: rgb(1, 139, 139);
+    padding: 1em 0;
+    position: absolute; /*WITH RESPECT TO PARENT*/
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+   }
+   .dropdown li + li {
+    margin-top: 10px;
+   }
+   .dropdown li {
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+   }
+   .dropdown li:hover {
+    background-color: #4c9e9e;
+   }
+   .services:hover .dropdown {
+    display: block;
+   }
+   #checkbox_toggle{
+ display: none;
+} 
+/*HAMBURGER MENU*/
+.hamburger {
+ display: none;
+ font-size: 24px;
+ user-select: none;
+}
+/* APPLYING MEDIA QUERIES */
+@media (max-width: 768px) {
+.menu { 
+ display:none;
+ position: absolute;
+ background-color:teal;
+ right: 0;
+ left: 0;
+ text-align: center;
+ padding: 16px 0;
+}
+.menu li:hover {
+ display: inline-block;
+ background-color:#4c9e9e;
+ transition: 0.3s ease;
+}
+.menu li + li {
+ margin-top: 12px;
+}
+input[type=checkbox]:checked ~ .menu{
+ display: block;
+}
+.hamburger {
+ display: block;
+}
+.dropdown {
+ left: 50%;
+ top: 30px;
+ transform: translateX(35%);
+}
+.dropdown li:hover {
+ background-color: #4c9e9e;
+}
+}
+
+.people-nearby .google-maps{
+  background: #f8f8f8;
+  border-radius: 4px;
+  border: 1px solid #f1f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.people-nearby .google-maps .map{
+  height: 300px;
+  width: 100%;
+  border: none;
+}
+
+.people-nearby .nearby-user{
+  padding: 20px 0;
+  border-top: 1px solid #f1f2f2;
+  border-bottom: 1px solid #f1f2f2;
+  margin-bottom: 20px;
+}
+
+img.profile-photo-lg{
+  height: 80px;
+  width: 80px;
+  border-radius: 10%;
+}
+.glow-on-hover:hover{
+   background: rgb(25, 44, 109);
+   border: aqua;
+}
+
+
+	</style>
+</head>
+{% endblock core_head %}  
+{% block core_body %}
+<nav class="navbar">
+	<!-- LOGO -->
+	<div class="logo">ChitChat
+	</div>
+	<div class="welcome">
+		<h5>Welcome {{request.user.first_name}}</h5>
+	</div>
+	<!-- NAVIGATION MENU -->
+	<ul class="nav-links">
+	  <!-- USING CHECKBOX HACK -->
+	  <input type="checkbox" id="checkbox_toggle" />
+	  <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+	  <!-- NAVIGATION MENUS -->
+	  
+	  <div class="menu">
+		
+		<li><a href="/">Chat</a></li>
+		<li class="services">
+		  <a href="/">Services</a>
+		  <!-- DROPDOWN MENU -->
+		  <ul class="dropdown">
+			<li><a href="/">Dropdown 1 </a></li>
+			<li><a href="/">Dropdown 2</a></li>
+			<li><a href="/">Dropdown 2</a></li>
+			<li><a href="/">Dropdown 3</a></li>
+			<li><a href="/">Dropdown 4</a></li>
+		  </ul>
+		</li>
+		<li><a href="/">Hello</a></li>
+		<li><a href="/">There</a></li>
+	  </div>
+	</ul>
+  </nav>
+
+<div class="container">
+				{% if messages %}
+				{% for message in messages %}
+				<div class="alert alert-{{message.tags}}">{{ message }}</div>
+				{% endfor %}
+				{% endif %}
+				{{ room_name|json_script:"room-name" }}
+				{{ user_account.id|json_script:"user_account_id" }}
+				{{ friend_requests_json|json_script:"frq" }}
+
+		<div class="main-body">
+			<div class="row">
+				<div class="col-lg-4">
+				<form method="post" action="{% url 'accounts:profile_update' userId=user_account.id %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex flex-column align-items-center text-center">
+							<div id="lightgallery">
+								<a href=" {{user_account.get_photo_url}}"><img src="{{user_account.get_photo_url}}" alt="{{user_account.username}}" class="rounded-circle p-1 bg-primary" width="200" height="200"></a>
+							</div>
+								{% if is_self %}
+								<div class="row" style="margin-top: 10px;">
+										<label for="profile_image_input" class="btn btn-primary">Change Profile Picture</label>
+										<input type="file" name="profile_image"  id="profile_image_input">
+								</div>
+								{% if form.profile_image.errors %}
+										<div class="alert alert-danger">
+											{{ form.profile_image.errors}}	
+										</div>
+								{% endif %}
+								{% endif %}
+									<h4>{{user_account.first_name}} {{user_account.last_name}}</h4>
+									<p class="text-secondary mb-1">Student unemployed</p>
+									<p class="text-muted font-size-sm">Orchid International College</p>
+								<div id="friend_operations">
+									{% if not is_friend and not is_self %}	
+											<div id="send_cancel_div" {% if not is_friend and not is_self %} style="display: visible;" {% else %} style="display: none;" {% endif %}>
+											{% if friend_request_status == -1 %}
+											<input type="button" id="send_request_btn" data-id={{user_account.id}} class="btn btn-primary"
+											 value="Add Friend" {% if friend_request_status == -1 %} style="display: visible;" {% else %} style="display: none;" {% endif %} >
+											{% endif %}
+											 {% if friend_request_status == 1 %}
+											<input type="button" id="cancel_request_btn" data-id={{user_account.id}} class="btn btn-danger"
+											 value="Cancel Request" {% if friend_request_status == 1 %} style="display: visible;" {% else %} style="display: none;" {% endif %}>
+											 {% endif %}
+											</div>	
+									{% endif %}		
+									{% if friend_request_status == 0 %}
+									<div class="btn-group" id="respond_request_div">
+										<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class='fas fa-user'></i> Respond Request
+										</button>
+										<div class="dropdown-menu respond-menu">
+										<input type="button" class="btn btn-success respond-accept" data-requestid = "{{pending_request_id}}" value="Accept" id="respond-accept-btn" >
+										<input type="button" class="btn btn-danger respond-decline" data-requestid = "{{pending_request_id}}" value="Decline" id="respond-decline-btn">
+										</div>
+									  </div>
+									  {% endif %}
+									{% if is_friend %}
+									<div id="friends_function_div">
+									<a href="#" id="message" data-userid="{{user_account.id}}" class="btn btn-outline-primary">Message</a>
+										<div class="btn-group">
+											<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class='fas fa-check-double'></i>Friends
+											</button>
+											<div class="dropdown-menu friends">
+											<input type="button" id="unfriend_btn" data-id="{{user_account.id}}" class="dropdown-item friends-item" value="Unfriend">
+
+											</div>
+									  	</div>
+										<div class="dropdown">
+											<button class="btn btn-secondary dropdown-toggle btn-info" type="button" id="id_friends_toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Friends
+											</button>
+											<div class="dropdown-menu" aria-labelledby="id_friends_toggle">
+												<a class="dropdown-item" href="#" onclick="removeFriend('{{id}}', onFriendRemoved)">Unfriend</a>
+											</div>
+										</div>
+									</div>
+									{% endif %}
+								</div>
+								
+							</div>
+							<hr class="my-4">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">First Name :</h6>
+								</div>
+								
+								<div class="col-sm-3 text-secondary">
+									<input type="text" name="first_name" id="id_fname" class="form-control" value="{{user_account.first_name}}" {% if is_self %}  {% else %} readonly {% endif %} required>
+									{% if form.first_name.errors %}
+									<div class="alert alert-danger" style="height: 45px;">
+										{{ form.first_name.errors}}	
+									</div>
+									{% endif %}
+								</div>
+								<div class="col-md-2">
+									<h6 class="mb-0">Last Name :</h6>
+								</div>
+								<div class="col-sm-4 text-secondary">
+									<input type="text" name="last_name" id="id_lname" class="form-control" value="{{user_account.last_name}}" {% if is_self %}  {% else %} readonly {% endif %} required>
+									{% if form.last_name.errors %}
+									<div class="alert alert-danger" style="height: 45px;">
+										{{ form.last_name.errors}}
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Email :</h6>
+								</div>
+								
+								<div class="col-sm-9 text-secondary">
+									<input type="text" name="email" id="id_email" class="form-control"  {% if is_self %} value="{{user_account.email}}" {% else %} {% if hide_email %} value="***********" readonly {% else %}
+									value="{{user_account.email}}" readonly {% endif %} {% endif %} required>
+									{% if form.email.errors %}
+									<div class="alert alert-danger" style="height: 45px;">
+										{{ form.email.errors}}
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Username</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" name="username" id="id_username" class="form-control" value="{{user_account.username}}" {% if is_self %}  {% else %} readonly {% endif %} required>
+									{% if form.username.errors %}
+									<div class="alert alert-danger" style="height: 45px;">
+										{{ form.username.errors}}
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Date Joined :</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<p type="text" class="form-control">{{user_account.date_joined}} </p> 
+								</div>
+							</div>
+							
+
+							{% if is_self %}
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Hide Email :</h6>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" name="hide_email" id="id_hide_email" class="form-control" {% if hide_email %} checked {% else %} {% endif %}>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9 text-secondary">
+									<input type="submit" class="btn btn-primary px-4" value="Save Changes">
+								</div>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</form>
+				{% if is_self %}
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									
+									<div class="row">
+										<div class="col-md-6">
+											<button class="glow-on-hover" id="view-friends" type="button" data-toggle="modal" data-target="#friendlist">View Friends!</button>
+										</div>
+
+										{% include "friendlist.html" %}
+											  
+										<div class="col-md-6">
+											<button class="glow-on-hover" id="view-friend-request" type="button" data-toggle="modal" data-target="#friendrequest">Friend Requests!</button>
+										</div>
+										{% include "friendrequests.html" %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+<style type="text/css">
+body{
+    background: #f7f7ff;
+    margin-top:20px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.me-2 {
+    margin-right: .5rem!important;
+}
+</style>
+
+<script type="text/javascript">
+$('#profile_image_input').change(function() {
+  var i = $(this).prev('label').clone();
+  var file = $('#profile_image_input')[0].files[0].name;
+  $(this).prev('label').text(file);
+});
+</script>
+<!-- <script>
+	$(document).ready(function(){
+myurl = window.location.href
+setInterval(function(){
+    $.ajax({
+        type: 'GET',
+        url : myurl,
+        success: function(response){
+            console.log(response);
+            $("#btnupdatediv").hide();
+			$("#btnupdatediv").show();
+        },
+        error: function(response){
+            alert('An error occured')
+        }
+    });
+},3000);
+})
+</script> -->
+<script src="https://unpkg.com/localbase/dist/localbase.dev.js"></script>
+<script src="{% static 'utilityjs/db.js' %}"></script>
+<script src="{% static 'utilityjs/Module.js' %}"></script>
+<script src="{% static 'utilityjs/friendRequestHandle.js' %}"></script>
+
+<script type="text/javascript">
+	var privateChatWebSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/privatechat/'
+        + '{{request.user.id}}'
+        + '/'
+    )
+
+	privateChatWebSocket.onmessage = function(e){
+        var data = JSON.parse(e.data);
+
+		if(data.command == "private_chat"){
+            (async() => {
+            await addToDatabase(data);
+        })()
+            console.log(data);
+        }
+	}
+</script>
+
+<script type="text/javascript">
+	lightGallery(document.getElementById('lightgallery'),{
+		// plugins: [lgAutoplay, lgComment, lgFullscreen, lgHash, lgPager, lgRotate, lgShare, lgVideo, lgZoom, lgThumbnail],
+		plugins: [lgAutoplay,lgComment, lgFullscreen, lgHash, lgPager, lgRotate, lgShare, lgVideo, lgZoom],
+		mode: 'lg-slide' | 'lg-fade' | 'lg-zoom-in' | 'lg-zoom-in-big' | 'lg-zoom-out' | 'lg-zoom-out-big' | 'lg-zoom-out-in' | 'lg-zoom-in-out' | 'lg-soft-zoom' | 'lg-scale-up' | 'lg-slide-circular' | 'lg-slide-circular-vertical' | 'lg-slide-vertical' | 'lg-slide-vertical-growth' | 'lg-slide-skew-only' | 'lg-slide-skew-only-rev' | 'lg-slide-skew-only-y' | 'lg-slide-skew-only-y-rev' | 'lg-slide-skew' | 'lg-slide-skew-rev' | 'lg-slide-skew-cross' | 'lg-slide-skew-cross-rev' | 'lg-slide-skew-ver' | 'lg-slide-skew-ver-rev' | 'lg-slide-skew-ver-cross' | 'lg-slide-skew-ver-cross-rev' | 'lg-lollipop' | 'lg-lollipop-rev' | 'lg-rotate' | 'lg-rotate-rev' | 'lg-tube',
+	});
+</script>
+{% endblock core_body %}

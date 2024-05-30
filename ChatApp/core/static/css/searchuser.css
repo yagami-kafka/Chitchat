@@ -1,0 +1,92 @@
+#searchbar:focus{
+    background-color: #e8e8e8;
+}
+
+.not-visible{
+    display: none;
+}
+.search-result-member{
+    cursor: pointer;
+}
+
+/* #results-box{
+    padding: 0px 0px 15px 50px ;
+
+} */
+.results-card{
+    width: inherit;
+    box-shadow: 0 8px 8px 0 rgba(0,0,0,0.25);
+    transition: 0.5s;
+    border-radius: 7px;
+}
+.searchlist{
+    background: #ffffff;
+    transition: 0.5s;
+    border-top: 1px solid rgb(172, 171, 167);
+    text-decoration: none;
+    padding-top: 0.5em;
+    color: black;
+}
+.searchlist p{
+    font-size: small;
+    color: grey;
+}
+.searchlist:hover{
+    background-color: #dfdfdf;
+}
+/* .item{
+    text-decoration: none;
+    font-size: medium;
+    background-color: rgb(141, 0, 0);
+    margin-bottom: 50px;
+} */
+
+.user-image{
+width: 60px;
+height: 60px;
+border-radius: 50%;
+margin-bottom: 15px;
+}
+.add-member-label{
+    display: block;
+}
+.add-member{
+    overflow-y: scroll;
+}
+
+.AClass{
+    top:0;
+    right: 8px;
+    position: absolute;
+}
+.user-image-preview{
+    width: 70px;
+    height: 70px;
+    position:relative;
+    border-radius: 50%;
+    margin-bottom: 15px;  
+}
+.search-user-list{
+    margin: 0;
+    background-color: white;
+}
+.results-box{
+    background-color: white;
+}
+.search-user-list li a {
+    position: relative;
+    display: block;
+    padding: 15px 20px;
+    color: #202020;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    background-color: white;
+    border-top: 1px solid rgb(195, 206, 193);
+
+}
+.search-user-list li.active a ,.search-user-list li a:hover {
+    background: #eef3de;
+}
+.search-user-list li .chat-user-message {
+    font-size: 14px;
+}

@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <title>Chat - ChitChat</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/searchuser.css' %}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+
+  <style>
+
+.user_profile{
+  align-items: center;
+  display: block;
+  text-align: center;
+  padding-top: 1em;
+
+}
+.message_time_send {
+  display: flex;
+  color: rgb(70, 65, 65);
+  clear: both;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: -10px;
+}
+.replies_timestamp{
+  float: left;
+  margin-left: 40px;
+}
+.sent_timestamp{
+  float: right;
+  margin-right: 40px;
+}
+.user_profile img{
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+.fixedbar{
+  background: inherit;
+  left: 0;
+  top: 0;
+  width: inherit;
+  padding: inherit;
+  position: fixed;
+  z-index: 1;
+}
+.next-div{
+  position: relative;
+  clear: both;
+  margin-top: 115px;
+}
+.sk-circle {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+.sk-circle .sk-child {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sk-circle .sk-child:before {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  height: 15%;
+  background-color: rgb(6, 221, 228);
+  border-radius: 100%;
+  -webkit-animation: sk-circleBounceDelay 0.5s infinite ease-in-out both;
+          animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+}
+.sk-circle .sk-circle2 {
+  -webkit-transform: rotate(30deg);
+      -ms-transform: rotate(30deg);
+          transform: rotate(30deg); }
+.sk-circle .sk-circle3 {
+  -webkit-transform: rotate(60deg);
+      -ms-transform: rotate(60deg);
+          transform: rotate(60deg); }
+.sk-circle .sk-circle4 {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg); }
+.sk-circle .sk-circle5 {
+  -webkit-transform: rotate(120deg);
+      -ms-transform: rotate(120deg);
+          transform: rotate(120deg); }
+.sk-circle .sk-circle6 {
+  -webkit-transform: rotate(150deg);
+      -ms-transform: rotate(150deg);
+          transform: rotate(150deg); }
+.sk-circle .sk-circle7 {
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg); }
+.sk-circle .sk-circle8 {
+  -webkit-transform: rotate(210deg);
+      -ms-transform: rotate(210deg);
+          transform: rotate(210deg); }
+.sk-circle .sk-circle9 {
+  -webkit-transform: rotate(240deg);
+      -ms-transform: rotate(240deg);
+          transform: rotate(240deg); }
+.sk-circle .sk-circle10 {
+  -webkit-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+          transform: rotate(270deg); }
+.sk-circle .sk-circle11 {
+  -webkit-transform: rotate(300deg);
+      -ms-transform: rotate(300deg);
+          transform: rotate(300deg); }
+.sk-circle .sk-circle12 {
+  -webkit-transform: rotate(330deg);
+      -ms-transform: rotate(330deg);
+          transform: rotate(330deg); }
+.sk-circle .sk-circle2:before {
+  -webkit-animation-delay: -1.1s;
+          animation-delay: -1.1s; }
+.sk-circle .sk-circle3:before {
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s; }
+.sk-circle .sk-circle4:before {
+  -webkit-animation-delay: -0.9s;
+          animation-delay: -0.9s; }
+.sk-circle .sk-circle5:before {
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s; }
+.sk-circle .sk-circle6:before {
+  -webkit-animation-delay: -0.7s;
+          animation-delay: -0.7s; }
+.sk-circle .sk-circle7:before {
+  -webkit-animation-delay: -0.6s;
+          animation-delay: -0.6s; }
+.sk-circle .sk-circle8:before {
+  -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s; }
+.sk-circle .sk-circle9:before {
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s; }
+.sk-circle .sk-circle10:before {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s; }
+.sk-circle .sk-circle11:before {
+  -webkit-animation-delay: -0.2s;
+          animation-delay: -0.2s; }
+.sk-circle .sk-circle12:before {
+  -webkit-animation-delay: -0.1s;
+          animation-delay: -0.1s; }
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+  </style>
+   </head>
+<body>
+  
+  {{ private_thread_json |json_script:"private_thread" }}
+  {{ current_user |json_script:"logged_in_user"}}
+  {{ my_user |json_script:"my_user_json" }}
+  <div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Left Sidebar</h4>
+				</div>
+
+				<div class="modal-body">
+				<div class="modal-list">
+                <a href="{% url 'accounts:profile' userId=request.user.id %}"><li>My profile</li></a>
+          <li>Friends</li>
+          <a href="{% url 'logout' %}"><li>Logout</li></a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#group_creation_modal" onclick="clearStorage()">
+            Create Group
+          </button>
+        </div>
+				</div>
+
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div><!-- modal -->
+  
+  
+  <!-- Modal  for group chat creation-->
+  <div class="modal fade" id="group_creation_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Create Group chat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id = 'group_creation_form'  enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+            {% csrf_token %}
+            <div class="row form-group">
+              <div class="col-md-12">
+                <input type="text" name="group_name" autocomplete="off" id="group_name" class="form-control" placeholder="Group chat name" required>
+              </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 text-secondary form-group">
+            <label for="group_image">Group Image</label>
+              <input type="file" name="group_image" class="form-control" id="group_image">
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12 text-secondary">
+              <input type="text" name="group_description" id="group_description" class="form-control" placeholder="Write something about group">
+              <img id="blah" src="#" alt="your image" />
+            </div>
+          </div>
+          <div class="form-group add-member" id="add-member">
+            <h5>Add Members</h5>
+            <div class="card">
+              <div class="card-body">
+                <div class='contacts_preview' id='contacts_preview'>
+                  
+                </div>
+                <input type="text" name="add_member_search" placeholder="Search people to add..." id="new_member_add" class="form-control">
+                <div class="members-result-box" id="members-result-box">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" form="group_creation_form" id="submit_gc_creation" value="Create">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Error MODAL -->
+<button type="button" id="id_trigger_client_error_modal" class="d-none btn btn-primary" data-toggle="modal" data-target="#id_client_error_modal">
+</button>
+<div class="modal fade" id="id_client_error_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Socket Client Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="id_client_error_modal_body">Something went wrong.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="id_client_error_modal_close_btn">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Client Error MODAL -->
+
+
+
+  <div class="sidebar open" id="sideBar">
+    <div class="fixedbar">
+    <form id="searchbar" autocomplete="off" onkeydown="return event.key != 'Enter';">
+        {% csrf_token %}
+      <li>
+      <i class="bx bx-search"></i>
+      <input type="text" id="search-input" placeholder="Search..."></input>
+      <span class="tooltip">Search</span>
+      </li>
+    </form>
+    <div id="results-box" class="results-card not-visible">
+
+    </div>
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus icon'></i>
+        <div class="logo_name">ChitChat</div>
+        
+    <i class="bx bx-menu" id="btn" data-toggle="modal" data-target="#myModal"></i>
+
+    </div>
+  </div>
+  
+   <div class="next-div" id="contact-list" >
+    <ul class="nav-list" id="contact_list_ul">
+      {% if chat_threads %}
+      {% for thread in chat_threads %}
+      {% if thread.first_user or thread.second_user  %}
+
+        {% if thread.first_user == request.user %}
+          <li style="cursor: pointer;">
+            <a onclick="onSelectFriend('{{thread.second_user.id}}',this);" class="myclass" data-userId="{{thread.second_user.id}}" id="id_friend_list_{{thread.second_user.id}}">
+              <!-- <i class='bx bx-chat' ></i> -->
+              <div class="col-lg-4">
+              <img id="id_friend_img_{{thread.second_user.id}}" src="{{thread.second_user.profile_image.url}}" class="contacts-image" style="height:70px; width: 70px; border-radius: 50%;" alt="" srcset="">
+              </div>
+              <span class="links_name">{{thread.second_user.first_name}} {{thread.second_user.last_name}}
+                  <p style="color: black;font-size: small;">You: hi there</p>
+              </span>
+
+            </a>
+            <span class="tooltip">Messages</span>
+            <button class="button-17" role="button"><b>&hellip;</b></span></button>
+          </li>
+          {% else %}
+          <li style="cursor: pointer;">
+            <a onclick="onSelectFriend('{{thread.first_user.id}}',this);" class="myclass" data-userId="{{thread.first_user.id}}" id="id_friend_list_{{thread.first_user.id}}">
+              <!-- <i class='bx bx-chat' ></i> -->
+              <div class="col-lg-4">
+              <img id="id_friend_img_{{thread.first_user.id}}" src="{{thread.first_user.profile_image.url}}" class="contacts-image" style="height:70px; width: 70px; border-radius: 50%;" alt="" srcset="">
+              </div>
+              <span class="links_name">{{thread.first_user.first_name}} {{thread.first_user.last_name}}
+                  <p style="color: black;font-size: small;">You: hi there</p>
+              </span>
+
+            </a>
+            <span class="tooltip">Messages</span>
+            <button class="button-17" role="button"><b>&hellip;</b></span></button>
+          </li>
+          {% endif %}
+      {% else %}
+      <li style="cursor: pointer;">
+        <a onclick="onSelectGroup('{{thread.id}}',this);" class="myclass" data-userId="{{thread.id}}" id="id_friend_list_{{thread.id}}">
+          <!-- <i class='bx bx-chat' ></i> -->
+          <div class="col-lg-4">
+          <img id="id_friend_img_{{thread.id}}" src="{{thread.image.url}}" class="contacts-image" style="height:70px; width: 70px; border-radius: 50%;" alt="" srcset="">
+          </div>
+          <span class="links_name">{{thread.group_name}} this is group
+              <p style="color: black;font-size: small;">You: hi there</p>
+          </span>
+
+        </a>
+        <span class="tooltip">Messages</span>
+        <button class="button-17" role="button"><b>&hellip;</b></span></button>
+      </li>
+
+      {% endif %}
+     {% endfor %}
+     {% endif %}
+
+      <li  style="cursor: pointer;">
+       <a onclick="console.log('check me')">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name">Setting</span>
+         <span style="color:rgb(0, 0, 0);margin-top:35px;margin-left: -55px;">You: Hi there</span>
+
+       </a>
+       <span class="tooltip">Setting</span>
+     </li>
+     <li class="profile">
+         <div class="profile-details">
+           <img src="profile.jpg" alt="profileImg">
+           <div class="name_job">
+             <div class="name">Bibek Paudyal</div>
+             <div class="job">Noob</div>
+           </div>
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  </div>
+
+
+
+  <div class="home-section" id="home_section">
+    <div class="chat-header">
+        <div class="header-image">
+
+            <h5>{{ user.get_username }}</h5>
+        </div>
+    </div>
+
+    <div class="messages" id="chat_section">
+      
+        <ul id="message_history">
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt=""  />
+					<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+          </li>
+
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>When you're backed against the wall, break the god damn thing down.</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>Excuses don't win championships.</p>
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>Oh yeah, did Michael Jordan tell you that?</p>
+            
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+					<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+          </li>
+
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>When you're backed against the wall, break the god damn thing down.</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>Excuses don't win championships.</p>
+          <span class="message_time_send replies_timestamp">8:55 AM, Today</span>
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>Oh yeah, did Michael Jordan tell you that?</p>
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+					<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!
+            
+          </p>
+          <span class='message_time_send sent_timestamp'>8:55 AM, Today</span>
+          </li>
+
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>When you're backed against the wall, break the god damn thing down.</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>Excuses don't win championships.</p>
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>Oh yeah, did Michael Jordan tell you that?</p>
+          </li>
+
+        </ul>
+    </div>
+    <span class="" id="page_number_id">1</span>
+      <div class="message-input">
+        
+        
+        {% csrf_token %}
+        <i class="bx bx-paperclip" style="color: white; font-size: 23px;margin: 0.5em;cursor: pointer;"><input id="fileupload" type="file" name="file" multiple
+          style="display: none;"
+          
+          data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'></i>
+
+          <textarea placeholder="Write your message..." id="chat_message_input" ></textarea>
+          
+      </div>
+    </div>
+  <div class="media-section">
+    <div class="user_profile">
+      <a style="text-decoration: none;cursor: pointer;color: white;" id="other_user_info">
+      <img src="{% static 'images/nouser.jpg' %}" id="other_user_profile_image"  alt="" srcset="">
+      <h4 class="ml-2" id="id_other_username">Bibek Paudyal</h4>
+      <p>Scroll count: <h6 id="scroll_count"></h6></p>
+    </a>
+    </div>
+  </div>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  // closeBtn.addEventListener("click", ()=>{
+  //   sidebar.classList.toggle("open");
+  //   menuBtnChange();//calling the function(optional)
+  // });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    var cwidth = document.body.clientWidth;
+    if(sidebar.classList.contains('open') && cwidth > 820){
+      
+    }else{
+      sidebar.classList.toggle("open");
+    }
+    alterClass(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  // function menuBtnChange() {
+  //  if(sidebar.classList.contains("open")){
+  //    closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+  //  }else {
+  //    closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+  //  }
+  // }
+    $(document).ready(function($) {
+  var alterClass = function() {
+    var ww = document.body.clientWidth;
+    console.log("this is ww"+ww);
+    if (ww < 820) {
+      $('.sidebar').removeClass('open');
+      $('.button-17').css('display','none');
+      $('.media-section').addClass('close');
+      $('.home-section').css('overflow-x','hidden');
+
+    } else if (ww >= 821) {
+      $('.sidebar').addClass('open');
+      $('.media-section').removeClass('close');
+      $('.home-section').css('width','');
+    };
+  };
+  $(window).resize(function(){
+    alterClass();
+  });
+  //Fire it when the page first loads:
+  alterClass();
+});
+group_image.onchange = evt => {
+  const [file] = group_image.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+  </script>
+  <script src="{% static 'utilityjs/searchuser.js' %}"></script>
+
+  <script src="{% static 'utilityjs/base.js' %}"></script>
+
+  <script async="async" defer="defer" src="{% static 'utilityjs/privatechat.js' %}" 
+  {% if user.is_authenticated %} data-authenticated="true" {% endif %}>
+</script>
+  <script type="text/javascript">
+    onStart()
+    function getIDs() {
+  var lis = document.getElementById("contact_list_ul").getElementsByTagName("a");
+  for (li of lis) {
+    console.log(li.getAttribute("data-userid")); // paints id
+    return li.getAttribute('data-userid');
+    break;
+  }
+}
+function onStart(){
+  
+  '{% if private_thread %}'
+  console.log("cha raicha thread ta")
+    if("{{private_thread.first_user}}" == "{{request.user}}"){
+      onSelectFriend("{{private_thread.second_user.id}}")
+    }
+    else{
+      onSelectFriend("{{private_thread.first_user.id}}",this)
+    }
+  '{% else %}'
+  console.log("khuchhing")
+    '{% if message_and_friends %}'
+      onSelectFriend("{{message_and_friends.0.friend.id}}",this)
+    '{% endif %}'
+  '{% endif %}'
+  '{% for x in message_and_friends %}'
+    console.log("image preloading")
+    preloadImage("{{x.friend.profile_image.url|safe}}", "id_friend_img_{{x.friend.id}}")
+  '{% endfor %}'
+}
+  </script>
+  
+  <script>
+
+var removeActiveThreadFriend = ()=>{
+    '{% if chat_threads %}'
+			'{% for thread in chat_threads %}'
+      '{% if thread.first_user or thread.second_user %}'
+        '{% if thread.first_user == request.user %}'
+				  document.getElementById("id_friend_list_{{thread.second_user.id}}").classList.remove('active-contact');
+          '{% else %}'
+				  document.getElementById("id_friend_list_{{thread.first_user.id}}").classList.remove('active-contact');
+          '{% endif %}'
+      '{% else %}'
+				  document.getElementById("id_friend_list_{{thread.id}}").classList.remove('active-contact');
+      '{% endif %}'
+			'{% endfor %}'
+		'{% endif %}'
+
+		// clear the profile image and username of current chat
+		document.getElementById("other_user_profile_image").classList.add("d-none")
+		document.getElementById("other_user_profile_image").src = "{% static 'images/nouser.jpg' %}"
+		document.getElementById("id_other_username").innerHTML = ""
+}
+  </script>
+
+<script type="text/javascript">
+  var ulist = document.getElementById('contact_list_ul');
+  $( document ).ready(function() {
+      console.log( "ready!" );
+     var myfunc = ()=>{
+        $.ajax({
+            type: "GET",
+  
+            url: window.location.origin+'/chat/chat_thread_list/',
+            timeout: 5000,
+            success: (data) => {
+                console.log(data);
+                console.log(data['chat_threads']);
+                ulist.innerHTML = ''
+                data['chat_threads'].forEach(thread => {
+                  if(thread.first_user || thread.second_user){
+                    console.log("private chat")
+                    if(thread.first_user.username === '{{request.user}}'){
+                      var myhtml = `<li style="cursor: pointer;">
+                                    <a onclick="onSelectFriend('${thread.second_user.id}',this);" class="myclass" data-userId="${thread.second_user.id}" id="id_friend_list_${thread.second_user.id}">
+                                      <!-- <i class='bx bx-chat' ></i> -->
+                                      <div class="col-lg-4">
+                                      <img id="id_friend_img_${thread.second_user.id}" src="${thread.second_user.profile_image}" class="contacts-image" style="height:70px; width: 70px; border-radius: 50%;" alt="" srcset="">
+                                      </div>
+                                      <span class="links_name">${thread.second_user.first_name} ${thread.second_user.last_name}
+                                          <p style="color: black;font-size: small;">You: hi there</p>
+                                      </span>
+
+                                    </a>
+                                    <span class="tooltip">Messages</span>
+                                    <button class="button-17" role="button"><b>&hellip;</b></span></button>
+                                  </li>`
+                       ulist.innerHTML += myhtml
+                    }else{
+                      var myhtml = `<li style="cursor: pointer;">
+                                    <a onclick="onSelectFriend('${thread.first_user.id}',this);" class="myclass" data-userId="${thread.first_user.id}" id="id_friend_list_${thread.first_user.id}">
+                                      <!-- <i class='bx bx-chat' ></i> -->
+                                      <div class="col-lg-4">
+                                      <img id="id_friend_img_${thread.first_user.id}" src="${thread.first_user.profile_image}" class="contacts-image" style="height:70px; width: 70px; border-radius: 50%;" alt="" srcset="">
+                                      </div>
+                                      <span class="links_name">${thread.first_user.first_name} ${thread.first_user.last_name}
+                                          <p style="color: black;font-size: small;">You: hi there</p>
+                                      </span>
+
+                                    </a>
+                                    <span class="tooltip">Messages</span>
+                                    <button class="button-17" role="button"><b>&hellip;</b></span></button>
+                                  </li>`
+                       ulist.innerHTML += myhtml
+                      console.log(thread.first_user.username)
+                    }
+                  }else{
+                    console.log("group chat")
+                    var myhtml = `<li style="cursor: pointer;">
+                                  <a onclick="onSelectGroup('${thread.id}',this);" class="myclass" data-userId="${thread.id}" id="id_friend_list_${thread.id}">
+                                    <!-- <i class='bx bx-chat' ></i> -->
+                                    <div class="col-lg-4">
+                                    <img id="id_friend_img_${thread.id}" src="${thread.image}" class="contacts-image" style="height:70px; width: 70px; border-radius: 50%;" alt="" srcset="">
+                                    </div>
+                                    <span class="links_name">${thread.group_name} this is group
+                                        <p style="color: black;font-size: small;">You: hi there</p>
+                                    </span>
+
+                                  </a>
+                                  <span class="tooltip">Messages</span>
+                                  <button class="button-17" role="button"><b>&hellip;</b></span></button>
+                                </li>`
+                       ulist.innerHTML += myhtml
+                    console.log(thread.group_name)
+                  }
+                })
+                
+            },
+            error: (data) => {
+                alert("Something went wrong: " + data)
+            },
+            complete: (data) => {
+                console.log("get completed.")
+            }
+        })
+       }
+      //  myfunc();
+      //  setTimeout(myfunc,1000);
+      // setInterval(myfunc ,2000); 
+  });
+  
+  
+  
+  </script>
+
+  
+</body>
+</html>

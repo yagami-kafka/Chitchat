@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block core_body %}
+<div class="hero">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" style="color: white;" id="logintoggle" class="toggle-btn" onclick = "login()">Login</button>
+            <button type="button" class="toggle-btn" id="registertoggle" onclick="register()">Register</button>
+        </div>
+        <form id="login-form" action="{% url 'login' %}" method ="POST" class="input-group">
+            {% csrf_token %}
+            <input type="text" class="input-field" name="username" id="loginusername" placeholder="Enter your email">
+            <input type="password" class="input-field" name="password" id="loginpassword" placeholder="Enter your password">
+            <input type="checkbox" class="check-box" name="" id="logincheckbox"><span>Remember Password</span>
+            {% for field in user_login_form %}
+				<p>
+				{% for error in field.errors %}
+				<p style="color: red">{{ error }}</p>
+				{% endfor %}
+				</p>
+				{% endfor %}
+				{% if user_login_form.non_field_errors %}
+				<div style="color: red">
+					<p>{{user_login_form.non_field_errors}}</p>
+				</div>
+
+				{% endif %}
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <form id="register-form" action="{% url 'signup' %}" method ="POST" class="input-group">
+            {% csrf_token %}
+            <input type="text" class="input-field" name="first_name"  placeholder="First Name">
+            <input type="text" class="input-field" name="last_name"  placeholder="Last Name">
+            <input type="text" class="input-field" name="username" id="registerusername" placeholder="Enter your username">
+            <input type="email" class="input-field" name="email" id="email" placeholder="Enter a valid email address">
+            <input type="password" class="input-field" name="password1" id="registerpassword" placeholder="Enter a password">
+            <input type="password" class="input-field" name="password2" id="confirmpassword" placeholder="Confirm password">
+            <input type="checkbox" class="check-box" name="" id="registercheckbox"><span>Remember Password</span>
+
+            {% for field in user_registration_form %}
+				<p>
+				{% for error in field.errors %}
+				<p style="color: red">{{ error }}</p>
+				{% endfor %}
+				</p>
+				{% endfor %}
+				{% if user_registration_form.non_field_errors %}
+				<div style="color: red">
+					<p>{{user_registration_form.non_field_errors}}</p>
+				</div>
+
+				{% endif %}
+
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+    </div>
+</div>
+
+{% endblock core_body %}

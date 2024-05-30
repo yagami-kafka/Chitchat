@@ -1,0 +1,119 @@
+
+<style>
+    .friendcard{
+        width: 100%;
+        background:rgb(255, 255, 255);
+        border-radius: 10px;
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+        padding-left: 1em;
+        border: 1px solid rgb(214, 211, 199);
+        box-shadow: rgb(7, 140, 145) 0px 20px 30px -10px;
+        /* box-shadow: rgba(4, 210, 224, 0.2) 0px 7px 29px 0px; */
+    }
+
+.dropdown-menu-center {
+  left: 50% !important;
+  top:25% !important;
+  right: auto !important;
+  text-align: center !important;
+  width: 20% !important;
+  transform: translate(-50%, 0) !important;
+}
+
+    .friendcard:hover{
+        background:rgba(4, 210, 224, 0.2);
+    }
+    .profile-link{
+        text-decoration: none;
+    }
+
+
+
+    .options{
+        align-items: center;
+        margin-right: 0;
+    } 
+    .button-17{
+  /* margin:-45px 50px 0 0; */
+  width: 40px;
+  content: '...';
+  height: 38px;
+  border-radius: 50%;
+  border: white;
+  background-color: white;
+  cursor: pointer;
+  justify-content: center;
+  letter-spacing: .25px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  will-change: transform,opacity;
+  text-align: center;
+  z-index: 2;
+  display: block;
+  color: black;
+}
+
+ .button-17:hover {
+  background: #e7f0fa;
+  color: #174ea6;
+}
+
+.friendcard:hover .button-17{
+  transition: all 0.5s ease;
+
+}
+
+ .button-17:active {
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+  outline: none;
+}
+
+ .button-17:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+}
+
+ .button-17:not(:disabled) {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+ .button-17:not(:disabled):hover {
+  box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+
+ .button-17:not(:disabled):focus {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+ .button-17:not(:disabled):active {
+  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+ .button-17:disabled {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+</style>
+<div class="modal fade" id="friendlist" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Friend List</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            <div class="modal-body">
+                <div class="container" >
+                    
+                    <div class="row" id="friendlistcontainer">
+
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chat | ChitChat -Chat App</title>
+
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'package/css/lightgallery-bundle.css' %}" />
+    <script src="{% static 'package/lightgallery.umd.js' %}"></script>
+            <!-- Optional Plugins -->
+            <script src="{% static 'package/plugins/autoplay/lg-autoplay.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/comment/lg-comment.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/fullscreen/lg-fullscreen.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/hash/lg-hash.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/mediumZoom/lg-medium-zoom.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/pager/lg-pager.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/relativeCaption/lg-relative-caption.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/rotate/lg-rotate.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/share/lg-share.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/thumbnail/lg-thumbnail.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/video/lg-video.umd.js' %}"></script>
+            <script src="{% static 'package/plugins/zoom/lg-zoom.umd.js' %}"></script>
+    
+    {% block core_head %}
+    {% endblock core_head %}
+</head>
+<body>
+    {% block core_body %}
+    {% endblock core_body %}
+</body>
+{% block core_script %}
+<script src="{% static 'utilityjs/login.js' %}"></script>
+
+{% endblock %}
+
+</html>

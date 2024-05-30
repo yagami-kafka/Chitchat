@@ -1,0 +1,136 @@
+<style type="text/css">
+.profile-image{
+		max-height: 100px;
+		max-width: 100px;
+	}
+	.profile-image{
+		border-radius: 50%;
+	}
+
+    .profile-link{
+		color: #000;
+    text-decoration: none;
+	}
+
+    /*
+	.card{
+		border-radius: 12px;
+	}
+	.dropdown-toggle::after { 
+		content: none; 
+	}
+
+	.material-icons{
+		font-size: 30px;
+	}
+	.material-icons:hover{
+		cursor: pointer;
+	}
+	.confirm-friend-request{
+		color: green;
+	}
+	.confirm-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request{
+		color: red;
+	} */
+
+    .requestcard{
+        background:white;
+        border-radius: 10px;
+        margin-top: 0.5em;;
+        padding-top: 0.5em;
+        border: 1px solid rgb(214, 211, 199);
+        box-shadow: rgb(7, 140, 145) 0px 20px 30px -10px;
+        /* box-shadow: rgba(4, 210, 224, 0.2) 0px 7px 29px 0px; */
+    }
+
+
+    /* .options{
+        float: right;
+        margin-top: -150px;
+        padding: 1em;
+    } */
+</style>
+{{ request.sender.id|json_script:"user_id" }}
+{{ request.user.id|json_script:"auth_user_id" }}
+<div class="modal fade" id="friendrequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Friend Requests</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            <div class="modal-body">
+                <div class="container" id="requestcontainer">
+                {% if friend_requests %}
+                {% for request in friend_requests %}
+                <div class="row requestcard">
+                        
+                        <div class="col-md-8">
+                        <div class="row">
+                        <a href="{%url 'accounts:profile' userId=request.sender.id %}">
+                        <div class="col-md-3">
+                        <img src="{{request.sender.profile_image.url}}" alt="user" class="profile-image">
+                        </div>
+                        <div class="col-md-5">
+                                <h5><a href="{%url 'accounts:profile' userId=request.sender.id %}" style="text-decoration: none;" class="profile-link">{{request.sender.first_name}} {{request.sender.last_name}}</a></h5>
+                                <p>@{{request.sender.username}}</p>
+                        </div>
+                        </a>
+                        </div>
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <input type="button" id="id_confirm_{{request.sender.id}}" onclick='triggerAcceptFriendRequest("{{request.id}}")' class="btn btn-success" value="Confirm">
+                            <input type="button" id="id_decline_{{request.sender.id}}" onclick='triggerDeclineFriendRequest("{{request.id}}")' class="btn btn-danger" value="Decline">
+
+                        </div>    
+                </div>
+                     {% endfor %}
+                        
+                    
+                    {% else %}
+
+                    <div class="d-flex flex-row flex-grow-1 justify-content-center align-items-center p-4">
+                        <p>No results</p>
+                    </div>
+                    {% endif %}
+                
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script>
+	$(document).ready(function(){
+myurl = window.location.origin
+const userId = JSON.parse(document.getElementById('user_id').textContent);
+
+console.log(userId);
+to_url = myurl+'/friends/view_friend_requests/'+userId;
+console.log(to_url)
+setInterval(function(){
+    $.ajax({
+        type: 'GET',
+        url : myurl,
+        success: function(response){
+            
+           
+        },
+        error: function(response){
+            alert('An error occured')
+        }
+    });
+},3000);
+})
+</script> -->
+
+
